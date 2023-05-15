@@ -37,5 +37,5 @@ python main.py --dataset yelp2018 --model LightGCN --kn_model LightGCN --lr 1e-3
 
 NGCF+
 ```shell
-python main.py --dataset yelp2018 --model NGCF --kn_model NGCF --lr 1e-4 --decay 1e-5 --a 1 --k_layers 3 --kn_layer 2 --device cuda:0 --batch_size 1024 --early_stop_times 50 --epochs 500 --patience 20 --node_drop 0 --mess_drop 0.1 --seed 1234;
+python main.py --dataset yelp2018 --model NGCF --kn_model NGCF --lr 1e-4 --decay 1e-4 --a 1 --k_layers 3 --kn_layer 1 --device cuda:0 --batch_size 1024 --early_stop_times 50 --epochs 500 --patience 20 --node_drop 0 --mess_drop 0.1 --seed 1234;
 ```
