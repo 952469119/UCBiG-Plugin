@@ -75,9 +75,9 @@ def test_one_batch(X):
             'ndcg': np.array(ndcg)}
 
 
-def test(model, data, mode=0, rate=1,test_batch_size=8192):
+def test(model, data,test_batch_size=8192):
     u_batch_size = test_batch_size
-    max_K = 20
+    max_K = max(topks)
 
     model.eval()
     results = {'precision': np.zeros(len(topks)),
@@ -97,22 +97,7 @@ def test(model, data, mode=0, rate=1,test_batch_size=8192):
 
             item = list(range(data.G.n_items))
             user_item, all_item_emb, _ = model(batch_users, item, [])
-
-            if mode == 1:
-                user_item = user_item[:,:64]
-                all_item_emb = all_item_emb[:, :64]
-            elif mode ==2:
-                user_item= user_item[:, 64:]
-                all_item_emb = all_item_emb[:, 64:]
-            elif mode==3:
-                user_item = user_item
-                all_item_emb0 = all_item_emb[:,:64]
-                all_item_emb1 = all_item_emb[:,64:]
-
-                all_item_emb1 = all_item_emb1*rate
-
-                all_item_emb = torch.cat((all_item_emb0, all_item_emb1), dim=1)
-
+            
             rating = model.rating(user_item, all_item_emb)
 
             exclude_index = []
